@@ -1,0 +1,29 @@
+{% extends 'home/navbar.html' %}
+{% block title %}
+<title>Review Complain</title>
+{% endblock title %}
+{% block content %}
+<div class="container">
+    <p>Lodger Id: {{complain.lodger}}</p>
+    <p>Against Id(s): {{complain.perpenetrer}}</p>
+    <p>Reviewer Id: {{complain.reviewer}}</p>
+    <p>Reviewer name: {{reviewername}}</p>
+    <p>Reason: {{complain.reason}}</p>
+    <p>Image Evidence: <img src={{complain.image.url}} alt=""> </p>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <label>Change Reviewer</label><br>
+        <input type="number" name="reviewchange" id="reviewer" value={{complain.reviewer}}>
+        <label>Add comment</label><br>
+        <input type="text" name="comment" id="comment">
+        <label>Do you want to Close this complain: </label>
+        <input class="form-check-input" id="" name="status[]" type="radio" value="Close">Yes </input>
+        <input class="form-check-input" id="" name="status[]" type="radio" value="Pending">No</input>
+        <br>
+        <button type="submit" class="btn btn-primary">Submit</button>
+
+    </form>
+</div>
+
+
+{% endblock content %}

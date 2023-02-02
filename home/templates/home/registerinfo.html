@@ -1,0 +1,61 @@
+{% extends 'home/main.html' %}
+{% block title %}
+Register Your Account
+{% endblock title %}
+
+{% block content %}
+
+<div class="container">
+    <div class="w-50 mx-auto mt-5 px-3 border border-secondary rounded text-white bg-dark">
+        <p class="h3">Register your Account</p>
+        <form action="registerinfo" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="">Enter Your Name: </label>
+            <input type="text" name="username" id="username" required><br>
+
+            <label for="">Enter Your email </label>
+            <span>: </span><input type="email" name="email" id="email" required><br>
+
+            <label for="">Enter Password: </label>
+            <input type="password" name="pass1" id="pass1" required><br>
+
+
+            <label for="">Confirm Password:</label>
+            <input type="password" name="pass2" id="pass2" required><br>
+
+            <label for="">Enter Your ID:</label>
+            <input type="number" name="id" id="id"><br>
+
+
+            <label>Whats Your Role: </label><br>
+            <div class="container">
+                <input class="form-check-input" id="" name="role[]" type="radio" value="Student">Student </input><br>
+                <input class="form-check-input" id="" name="role[]" type="radio" value="Faculty">Faculty</input><br>
+                <input class="form-check-input" id="" name="role[]" type="radio" value="Non-Faculty Teacher">Non-Faculty
+                Teacher</input><br>
+                <input class="form-check-input" id="" name="role[]" type="radio"
+                    value="Administration Officer">Administration Officer</input><br>
+                <input class="form-check-input" id="" name="role[]" type="radio" value="Admin">Admin</input><br>
+                <input class="form-check-input" id="" name="role[]" type="radio" value="Helper">Helper</input>
+
+            </div>
+
+            <br>
+
+
+            <label for="">Upload your Image:</label>
+            <input type="file" name="image" id="image"><br>
+
+            <label for="">Upload Image of your ID card:</label>
+            <input type="file" name="image2" id="image2"><br>
+
+            <br>
+            <button type="submit" class="btn btn-info mx-3 mb-2">Submit</button>
+
+            <p>*** A confirmation email will be send to your email. Confirm to Continue</p>
+
+        </form>
+    </div>
+
+</div>
+{% endblock content %}

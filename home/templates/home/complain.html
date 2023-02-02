@@ -1,0 +1,17 @@
+{% extends 'home/navbar.html' %}
+{% block title %}
+<title>Complain details</title>
+{% endblock title %}
+{% block content %}
+<div class="container">
+    <p>Lodger Id: {{complain.lodger}}</p>
+    <p>Against Id(s): {{complain.perpenetrer}}</p>
+    <p>Reviewer Id: {{complain.reviewer}}</p>
+    <p>Reviewer name: {{reviewername}}</p>
+    <p>Reason: {{complain.reason}}</p>
+    <p>Image Evidence: <img src={{complain.image.url}} alt=""> </p>
+   
+</div>
+
+
+{% endblock content %}

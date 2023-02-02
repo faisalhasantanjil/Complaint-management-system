@@ -1,0 +1,31 @@
+{% extends 'home/main.html' %}
+{% load socialaccount %}
+{% providers_media_js %} 
+{% block title %}
+Login Your Account
+{% endblock title %}
+
+{% block content %}
+
+<div class="w-25 mx-auto m-5">
+    <p class="h3">Login to your Account</p><br>
+    <form action="signin" method="POST" >
+        {% csrf_token %}
+       
+        <label for="">Enter Email:</label>
+        <input type="text" name="username" id="username"><br>
+
+        <label for="">Enter Password:</label>
+        <input type="password" name="pass1" id="pass1"><br>
+
+        <br>
+        <button type="submit" class="btn btn-primary">Submit</button>
+
+    </form>
+
+    <p>Don't have a account! Click here to <a href="registerinfo">register</a></p>
+    <p>Or signin with <a href="{% provider_login_url "google"%}">NSU email</a></p>
+
+</div>
+
+{% endblock content %}

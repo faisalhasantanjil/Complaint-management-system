@@ -1,0 +1,33 @@
+{% extends 'home/navbar.html' %}
+{% block title %}
+<title>Complain List</title>
+{% endblock title %}
+
+
+
+{% block content %}
+<div class="container m-5">
+    <table class="table table-secondary w-75 ">
+        <thead>
+            <tr>
+                <th scope="col">Lodger ID</th>
+                <th scope="col">Against</th>
+                <th scope="col">Reviewer ID</th>
+                <th scope="col">Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in complain %}
+            <tr>
+                <th>{{i.lodger}}</th>
+                <td>{{i.perpenetrer}}</td>
+                <td>{{i.reviewer}}</td>
+                <td><button><a href="{% url 'complain' i.id %}">view </a></button></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+{% endblock content %}

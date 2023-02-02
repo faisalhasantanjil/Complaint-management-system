@@ -1,0 +1,24 @@
+{% extends 'home/navbar.html' %}
+
+
+{% block title %}
+<title>Home</title>
+{% endblock title %}
+
+{% block content %}
+<div class="container">
+    {% if user.is_authenticated %}
+    <p class='h3'>Welcome {{users.name}}</p>
+    {% if users.role == "Admin" %}
+    <button class="border border-white rounded">
+        <p><a class="text-wrap text-decoration-none text-reset " href="lodgeforuser">Lodge for other user</a></p>
+    </button>
+    {% endif %}
+    {% if users.role == "Faculty" or users.role == "Administration Officer" %}
+    <button class="border border-white rounded">
+        <p><a class="text-wrap text-decoration-none text-reset " href="reviewlist">Review Complain</a></p>
+    </button>
+    {% endif %}
+    {% endif %}
+</div>
+{% endblock content %}

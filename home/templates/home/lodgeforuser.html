@@ -1,0 +1,153 @@
+{% extends 'home/main.html' %}
+{% block title %}
+<title>Lodge Complain</title>
+{% endblock title %}
+
+{% block content %}
+
+
+<div class="w-25 mx-auto m-5">
+    <form action="lodgingforuser" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <label for="">Select Lodger:</label>
+        <input id="search_here3" class="form-control" placeholder="" type="">
+        <div id="lodger" class=" m-3">
+            <table id="box3" class="table table-striped table-hover table-border">
+        
+            </table>
+        </div>
+
+        <label for="">Select Perpenetrer:</label>
+        <input id="search_here" class="form-control" placeholder="" type="">
+        <div id="" class=" m-3">
+            <table id="box" class="table table-striped table-hover table-border">
+              
+            </table>
+        </div>
+
+        <label for="">Select Reviewer:</label>
+        <input id="search_here2" class="form-control" placeholder="" type="">
+        <div id="reviewer" class=" m-3">
+            <table id="box2" class="table table-striped table-hover table-border">
+            
+            </table>
+        </div>
+
+        
+        <label for="">Reason</label>
+        <input type="text" name="reason" id="reason"><br>
+        
+        <label for="">Image Evidence:</label>
+        <input type="file" name="image" id="image">
+
+        <br>
+        <button type="submit" class="btn btn-primary">Submit</button>
+
+    </form>
+</div>
+
+{% endblock content %}
+{% block scripts %}
+<script>
+    const data = '{{qs_json}}'
+    console.log("data1: ", data)
+    const rdata = JSON.parse(data.replace(/&quot;/g, '"'))
+    console.log("rdata1: ", rdata)
+    const input = document.getElementById('search_here')
+    console.log("input1:", input)
+    let filteredArr = []
+
+
+    input.addEventListener('keyup', (e) => {
+        box.innerHTML = ""
+        filteredArr = rdata.filter(info => info['name'].toLowerCase().includes((e.target.value).toLowerCase()))
+        console.log("farray1: ", filteredArr)
+
+        if (filteredArr.length > 0) {
+            filteredArr.map(info => {
+                console.log(info['image'])
+                var images = info['image']
+                images='media/'+images
+                console.log(images)
+
+                box.innerHTML += `<tr>
+                    <td class=" w-25"><img class="img-fluid mw-100" src=${images} alt=""/></td>
+                    <td><p class="pt-3"><b>${info['name']}</b></p></td>
+                    <td ><p class="pt-3"><input class="form-check-input" id="in-check" name="accuser[]" type="checkbox" value=${info['id']} name="boxes"> </input></p></td>
+                    </tr>`
+                console.log(document.getElementById('in-check').value)
+            })
+
+        }
+
+        else {
+            box.innerHTML = "<b>no result..</b>"
+        }
+    })
+
+    const data2 = '{{qs_json2}}'
+    const rdata2 = JSON.parse(data2.replace(/&quot;/g, '"'))
+    console.log("rdata2: ", rdata2)
+    const input2 = document.getElementById('search_here2')
+    console.log("input2: ", input2)
+    let filteredArr2 = []
+
+    input2.addEventListener('keyup', (e) => {
+        box2.innerHTML = ""
+        filteredArr2 = rdata2.filter(info2 => info2['name'].toLowerCase().includes((e.target.value).toLowerCase()))
+        console.log("farray2: ", filteredArr2)
+        if (filteredArr2.length > 0) {
+            filteredArr2.map(info2 => {
+                var images = info2['image']
+                images='media/'+images
+
+                box2.innerHTML += `<tr>
+                    <td class=" w-25"><img class="img-fluid mw-100" src=${images} alt=""/></td>
+                    <td><b>${info2['name']}</b></td>
+                    <td><input class="form-check-input" id="in-check2" name="reviewer[]" type="radio" value=${info2['id']} name="boxes"> </input></td>
+                    </tr>`
+
+                console.log(document.getElementById('in-check2').value)
+            })
+
+        }
+
+        else {
+            box2.innerHTML = "<b>no result..</b>"
+        }
+    })
+
+    const data3 = '{{qs_json}}'
+    const rdata3 = JSON.parse(data3.replace(/&quot;/g, '"'))
+    console.log("rdata3: ", rdata3)
+    const input3 = document.getElementById('search_here3')
+    console.log("input3: ", input3)
+    let filteredArr3 = []
+
+    input3.addEventListener('keyup', (e) => {
+        box3.innerHTML = ""
+        filteredArr3 = rdata3.filter(info3 => info3['name'].toLowerCase().includes((e.target.value).toLowerCase()))
+        console.log("farray3: ", filteredArr3)
+        if (filteredArr3.length > 0) {
+            filteredArr3.map(info3 => {
+                var images = info3['image']
+                images='media/'+images
+
+                box3.innerHTML += `<tr>
+                    <td class=" w-25"><img class="img-fluid mw-100" src=${images} alt=""/></td>
+                    <td><b>${info3['name']}</b></td>
+                    <td><input class="form-check-input" id="in-check3" name="lodger[]" type="radio" value=${info3['id']} name="boxes"> </input></td>
+                    </tr>`
+
+                console.log(document.getElementById('in-check3').value)
+            })
+
+        }
+
+        else {
+            box2.innerHTML = "<b>no result..</b>"
+        }
+    })
+</script>
+{% endblock scripts %}
